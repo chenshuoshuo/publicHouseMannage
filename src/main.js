@@ -12,7 +12,7 @@ import '@/styles/index.scss' // global css
 import i18n from './lang' // Internationalization
 import './icons' // icon
 import store from './store'
-// import './permission.js'
+import './permission.js'
 
 Vue.use(Element, {
   size: 'medium', // set element-ui default size
