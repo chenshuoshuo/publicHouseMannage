@@ -7,6 +7,7 @@ import {getRefresh} from  '../auth'
 
 const BASE_IPS = window.g.BASE_IPS
 // create an axios instance
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 const service = axios.create({
   // baseURL: process.env.BASE_API, // api的base_url
   baseURL:BASE_IPS,

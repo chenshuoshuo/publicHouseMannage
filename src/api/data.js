@@ -2,7 +2,7 @@ import request from '@/utils/request'
 //获取所有公房状态
 export function getAllState(data){
     return request({
-        url:`/cmips1-server/asset/status?${data}`,
+        url:`/asset/status?${data}`,
         method:'get',
         
         
@@ -11,7 +11,7 @@ export function getAllState(data){
 //获取所有公房分类
 export function getAllType(data){
     return request({
-        url:`/cmips1-server/asset/category?${data}`,
+        url:`/asset/category?${data}`,
         method:'get',
         
         
@@ -20,7 +20,7 @@ export function getAllType(data){
 //编辑图标
 export function editIcon(query){
     return request({
-        url:`/cmips1-server/asset/category/?${query}`,
+        url:`/asset/category/?${query}`,
         method:'put',
     })
 }
@@ -28,7 +28,7 @@ export function editIcon(query){
 export function editColor(query){
     return request({
         // url:'/cmips1-server/asset/status/${query}',
-        url:`/cmips1-server/asset/status/?${query}`,
+        url:`/asset/status/?${query}`,
         method:'put',
         
     })
@@ -36,15 +36,16 @@ export function editColor(query){
 //获取所有公房地图配置
 export function getAllMapSetting(id){
     return request({
-        url:`/cmips1-server/asset/attr/${id}`,
+        url:`/asset/attr/list/${id}`,
         method:'get'
     })
 }
 //提交地图配置(需要携带token)
 export function submitSetting(data){
     return request({
-        url:`/cmips1-server/asset/attr?${data}`,
+        url:`/asset/attr/edit`,
         method:'put',
+        data
         
         
     })
@@ -52,7 +53,7 @@ export function submitSetting(data){
 //搜索公房分类
 export function searchType(name){
     return request({
-        url:`/cmips1-server/asset/category?${name}`,
+        url:`/asset/category?${name}`,
         method:'get',
         
 
@@ -61,7 +62,7 @@ export function searchType(name){
 //搜索公房状态
 export function searchStatus(status){
     return request({
-        url:`/cmips1-server/asset/status?${status}`,
+        url:`/asset/status?${status}`,
         method:'get',
         
 

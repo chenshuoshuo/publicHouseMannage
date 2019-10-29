@@ -85,7 +85,8 @@ export default {
                    obj.attrCode=[...this.checkList[i]];
                    params.push(obj)
             };
-             params=qs.stringify(params);
+            //  params=qs.stringify(params);
+            // params=JSON.stringify(params);
             console.log(params);
              submitSetting(params).then((res)=>{
                     console.log(res);

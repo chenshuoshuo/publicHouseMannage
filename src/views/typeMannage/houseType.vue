@@ -46,7 +46,7 @@
     <el-dialog title="编辑图标" :visible.sync="dialogFormVisible">
       <el-upload
         class="avatar-uploader"
-        action='https://cmdown.parkbobo.com/cmips1-server/asset/category/upload'
+        :action='url'
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
@@ -68,6 +68,7 @@ export default {
     
   data() {
     return {
+      url:'https://jsonplaceholder.typicode.com/posts/',
       listLoading: false,
       tableData: [
         // {
