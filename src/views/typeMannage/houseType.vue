@@ -50,6 +50,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :on-progress='loading'
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -103,8 +104,14 @@ export default {
       this.index=index;
       this.dialogFormVisible = true;
     },
+    loading(file){
+      console.log('file',file.raw);
+      
+    },
     handleAvatarSuccess(res, file){
+      
      this.imageUrl = URL.createObjectURL(file.raw);
+     console.log('img',this.imageUrl);
     },
     //确认图标
     submmit(){
@@ -115,6 +122,7 @@ export default {
           icon:this.tableData[this.index].icon,
           
       };
+      console.log(params);
       //处理参数
       params=qs.stringify(params)
       console.log(params);

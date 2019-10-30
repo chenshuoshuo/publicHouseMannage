@@ -73,7 +73,7 @@ export default {
     //提交地图配置(需要携带token)
     submit(){
          
-          if( this.checkList.every((item)=>{
+          if( this.checkList.some((item)=>{
               return  item.length!==0
           })){
             let params=[];

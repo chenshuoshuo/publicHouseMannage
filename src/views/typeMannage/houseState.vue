@@ -47,6 +47,7 @@
       
     </el-pagination>
     </div>
+    
     <el-dialog
      title="编辑颜色" :visible.sync="dialogFormVisible"
     >
@@ -67,6 +68,7 @@ export default {
  
   data() {
     return {
+      // scope.row.color
       typeName: "",
       listLoading:false,
       color:'#409EFF',
@@ -74,6 +76,7 @@ export default {
       pageSize:5,
       background:true,
       currentPage:0,
+      kk:'#C4EE1D',
       tableData:[
       //   {
       //   number:'02',
@@ -107,6 +110,12 @@ export default {
         color:this.tableData[this.index].color,
         statusCode:this.tableData[this.index].statusCode
       };
+      console.log({
+        color:this.tableData[this.index].color,
+        name:this.tableData[this.index].statusName
+        
+        
+      })
       
       //对参数进行处理
        params=qs.stringify(params);
