@@ -50,8 +50,9 @@
     
     <el-dialog
      title="编辑颜色" :visible.sync="dialogFormVisible"
+     class="colordialog"
     >
-     <el-color-picker  v-model="currentColor"></el-color-picker>
+     <el-color-picker  v-model="currentColor" class="colorpicker"></el-color-picker>
      <div style="text-align:right">
      <el-button type="primary" @click="submmit">提交</el-button>
      </div>
@@ -197,5 +198,10 @@ export default {
 .table{
   margin-top: 20px;
 }
+.colorpicker{
+
+ margin-left:50%;
+} 
+
 </style>
  

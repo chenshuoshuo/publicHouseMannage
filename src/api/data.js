@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import uploadIcon from '@/utils/uploadreq'
 //获取所有公房状态
 export function getAllState(data){
     return request({
@@ -24,6 +25,15 @@ export function editIcon(query){
         method:'put',
     })
 }
+//上传图标
+export function uploadicon(data){
+    return uploadIcon({
+        url:`/asset/category/upload `,
+        method:'post',
+        data
+    })
+}
+
 //编辑颜色
 export function editColor(query){
     return request({
