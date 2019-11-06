@@ -47,14 +47,16 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
-      >
+       >
         <div class="dialogdiv">
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+           <p>建议尺寸:100X100px</p>
           <p>只支持jpg.png格式，大小不超过100k</p>
         </div>
-        <el-button type="primary" @click="submmit">确定</el-button>
+        
       </el-upload>
+      <div style="text-align:right"><el-button type="primary" @click="submmit">确定</el-button></div>
       
     </el-dialog>
   </div>
@@ -237,6 +239,8 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+  padding: 10px;
+  border: 1px dashed gray
 }
 .dialogdiv{
   text-align: center
