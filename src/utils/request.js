@@ -11,7 +11,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 const service = axios.create({
   // baseURL: process.env.BASE_API, // api的base_url
   baseURL:BASE_IPS,
-  timeout: 5000 // request timeout
+   // request timeout
 })
 
 // request interceptor

@@ -9,7 +9,7 @@ const BASE_CCR = window.g.BASE_CCR
 export const ZK = axios.create({
   // baseURL: 'https://cmdown.parkbobo.com' // api的base_url
   baseURL:BASE_CCR,
-  timeout: 5000 // request timeout
+   // request timeout
 })
 
 // request interceptor

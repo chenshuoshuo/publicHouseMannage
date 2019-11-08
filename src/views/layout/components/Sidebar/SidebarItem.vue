@@ -16,7 +16,7 @@
             v-if="item.children[0].meta&&item.children[0].meta.icon"
             :icon-class="item.children[0].meta.icon"
           ></svg-icon>
-          <span
+          <spancv
             v-if="item.children[0].meta&&item.children[0].meta.title"
             slot="title"
           >{{generateTitle(item.children[0].meta.title)}}</span>
