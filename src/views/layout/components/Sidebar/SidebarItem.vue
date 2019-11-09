@@ -16,7 +16,7 @@
             v-if="item.children[0].meta&&item.children[0].meta.icon"
             :icon-class="item.children[0].meta.icon"
           ></svg-icon>
-          <spancv
+          <span
             v-if="item.children[0].meta&&item.children[0].meta.title"
             slot="title"
           >{{generateTitle(item.children[0].meta.title)}}</span>
@@ -51,10 +51,14 @@
         </template>
       </el-submenu>
     </template>
+    <div class="support">
+      <span>版本：&nbsp;V{{version}}</span>
+    </div>
   </div>
 </template>
 
 <script>
+const packgeJson = require('../../../../../package.json')
 import { generateTitle } from "@/utils/i18n";
 
 export default {
@@ -66,6 +70,11 @@ export default {
     isNest: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      version: packgeJson.version
     }
   },
   mounted() {
@@ -90,3 +99,12 @@ export default {
 };
 </script>
 
+<style scoped>
+.support {
+  position: absolute;
+  color: #bfcbd9;
+  font-size: 14px;
+  bottom: 25px;
+  left: 25px;
+}
+</style>

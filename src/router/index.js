@@ -18,41 +18,41 @@ export const constantRouterMap = [
   component:Noauth,
 
   },
-  // {
-  //   path: '/typeMannage',
-  //   component: Layout,
-  //   redirect: '/typeMannage/houseType',
-  //   name:'typeMannage',
-  //   meta:{
-  //     title:'typeMannage',
-  //     icon:'example'
-  //   },
-  //   children: [
-  //     { path: 'houseType', name: 'houseType',component:()=>import ('@/views/typeMannage/houseType'), meta: { title: 'houseType',icon: 'table'}},
-  //     { path: 'houseState', name: 'houseState',component:()=>import ('@/views/typeMannage/houseState'), meta: { title: 'houseState',icon: 'table'}},
+  {
+    path: '/typeMannage',
+    component: Layout,
+    redirect: '/typeMannage/houseType',
+    name:'typeMannage',
+    meta:{
+      title:'typeMannage',
+      icon:'example'
+    },
+    children: [
+      { path: 'houseType', name: 'houseType',component:()=>import ('@/views/typeMannage/houseType'), meta: { title: 'houseType',icon: 'component'}},
+      { path: 'houseState', name: 'houseState',component:()=>import ('@/views/typeMannage/houseState'), meta: { title: 'houseState',icon: 'component'}},
       
-  //   ]
-  // },
-  // {
-  //   path:'/systemSetting',
-  //   component:Layout,
-  //   name:'systemSetting',
-  //   redirect:'/systemSetting/mapSetting',
-  //   meta:{
-  //     title:'systemSetting',
-  //     icon:'example'
-  //   },
-  //   children:[
-  //     {path:'mapSetting',name:'mapSetting',component:()=>import ('@/views/systemSetting/mapSetting'), meta: { title: 'mapSetting',icon: 'table'}}
-  //   ]
+    ]
+  },
+  {
+    path:'/systemSetting',
+    component:Layout,
+    name:'systemSetting',
+    redirect:'/systemSetting/mapSetting',
+    meta:{
+      title:'systemSetting',
+      icon:'example'
+    },
+    children:[
+      {path:'mapSetting',name:'mapSetting',component:()=>import ('@/views/systemSetting/mapSetting'), meta: { title: 'mapSetting',icon: 'component'}}
+    ]
     
     
-  // }
+  }
   
   
 ]
 export function getConstantRouterMap(){
-    return store.getters.permission_routes;
+    return constantRouterMap
     // return constantRouterMap
 }
 export default new Router({

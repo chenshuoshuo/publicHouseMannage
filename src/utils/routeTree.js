@@ -41,18 +41,18 @@ const transform = (data) => {
         name: v.content,
         meta: {
           title: v.name,
-          icon: 'example'
+          icon: 'component'
         }
 
       }
-    }else{
+    } else {
       return {
         authorityId: v.authorityId,
         parentId: v.parentId,
         path: v.content,
         component: () => import(`@/views${v.route}`),
         name: v.content,
-        meta: { title: v.content,icon: 'table' }
+        meta: { title: v.content, icon: 'component' }
         
       }
     }
