@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 // let token=''
 // axios.defaults.headers.common['token'] = token;
-import {getRefresh} from  '../auth'
+import {getToken, getRefresh} from  '../auth'
 
 
 const BASE_IPS = window.g.BASE_IPS
@@ -29,12 +29,11 @@ service.interceptors.request.use(config => {
   // config.headers.common['token']=getRefresh()
 
 
-  // if (getRefresh()) {
-  //   // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-    
-  //   config.headers['Authorization'] = 'Bearer ' + getRefresh
-  //   config.headers['Cache-Control'] = 'no-cache'
-  // }
+  if (getRefresh()) {
+    // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
+    config.headers['Authorization'] = 'Bearer ' + getRefresh()
+    // config.headers['Cache-Control'] = 'no-cache'
+  }
   return config
 }, error => {
   // Do something with request error
