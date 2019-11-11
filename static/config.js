@@ -9,8 +9,7 @@ window.g = {
   // 地图门户管理接口地址
   // BASE_IPS: 'https://gis.swjtu.edu.cn/cmips-server',
   // BASE_IPS: 'https://cmdown.parkbobo.com/cm-m7722-server',
-  // BASE_IPS: 'https://cmdown.parkbobo.com/cmips-server',
-  BASE_IPS: 'http://192.168.4.97:8080',
+  BASE_IPS: 'https://cmdown.parkbobo.com/cmips-server',
   // CMGIS 接口地址
   // BASE_GIS: 'https://testgis.you07.com/cmgis-server'
   // BASE_GIS: 'https://cmdown.parkbobo.com/cmgis-server'

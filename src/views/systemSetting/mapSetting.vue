@@ -13,7 +13,7 @@
         :key="item.typeCode"
       >
         <p v-if="isnoSetting">该公房分类下还没有配置信息字段，请在'公房分类管理'中配置后，设置地图显示字段</p>
-        <el-checkbox-group v-model="pubItemObj[activeTypeCode].checkList" style="display:flex  flex-wrap:wrap">
+        <el-checkbox-group v-model="pubItemObj[activeTypeCode].checkList" style="display:flex  flex-wrap:wrap" :max="3">
           <el-checkbox
             style="width:220px"
             class="el-checkbox"
