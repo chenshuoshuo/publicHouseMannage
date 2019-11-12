@@ -30,61 +30,60 @@
   </div>
 </template>
 <script>
-import { getAllMapSetting, getAllType, submitSetting } from "@/api/data";
-import { constants } from "fs";
-import axios from "axios";
-import qs from "qs";
+import { getAllMapSetting, getAllType, submitSetting } from '@/api/data';
+import { constants } from 'fs';
+import axios from 'axios';
+import qs from 'qs';
 // :label="i.attrname" style="width:220px" class="el-checkbox" v-for="(i,k) of boxList[index]" :key='k'
 export default {
-  data() {
+  data () {
     return {
       activeTypeCode: null,
-      tabList: [], //公房列表
+      tabList: [], // 公房列表
       pubItemObj: {},
       isnoSetting: false
-    };
+    }
   },
-  created() {
+  created () {
     this.getAllType().then(() => {
       this.getAllMapSetting()
     })
   },
   methods: {
-    async getAllType() {
+    async getAllType () {
       const res = await getAllType()
-      this.tabList = res.data.data.content;
-      this.activeTypeCode = this.tabList[0].typeCode;
+      this.tabList = res.data.data.content
+      this.activeTypeCode = this.tabList[0].typeCode
       // console.log('this.tabList', this.tabList)
     },
-    async getAllMapSetting() {
+    async getAllMapSetting () {
       const res = await getAllMapSetting(this.activeTypeCode)
       const pubList = res.data.data
       // 默认选中
       const checkedItem = pubList.filter(item => item.display).map(item => item.attr_code)
       const innerObj = {}
-      this.$set(innerObj,'boxList', pubList)
-      this.$set(innerObj,'checkList', checkedItem)
-      this.$set(this.pubItemObj,this.activeTypeCode, innerObj)
+      this.$set(innerObj, 'boxList', pubList)
+      this.$set(innerObj, 'checkList', checkedItem)
+      this.$set(this.pubItemObj, this.activeTypeCode, innerObj)
       this.isnoSetting = this.pubItemObj.length === 0
       // console.log('pubItemObj', this.pubItemObj);
-      
     },
-    handleClick() {
+    handleClick () {
       this.getAllMapSetting()
     },
-    checkPub(val) {
+    checkPub (val) {
       // console.log('val', this.pubItemObj[this.activeTypeCode].checkList)
     },
-    //提交地图配置(需要携带token)
-    submit() {
+    // 提交地图配置(需要携带token)
+    submit () {
       if (
         this.pubItemObj[this.activeTypeCode].checkList.some(item => {
-          return item.length !== 0;
+          return item.length !== 0
         })
       ) {
-        let params = [];
+        let params = []
         Object.keys(this.pubItemObj).forEach(item => {
-          let obj = {};
+          let obj = {}
           obj.categoryId = item
           obj.attrCode = this.pubItemObj[item].checkList
           params.push(obj)
@@ -93,25 +92,25 @@ export default {
           // console.log(res);
           if (res.data.status) {
             this.$message({
-              type: "success",
-              message: "提交成功"
-            });
+              type: 'success',
+              message: '提交成功'
+            })
           } else {
             this.$message({
-              type: "warning",
-              message: "网络错误"
-            });
+              type: 'warning',
+              message: '网络错误'
+            })
           }
-        });
+        })
       } else {
         this.$message({
-          type: "warning",
-          message: "各类公房的地图配置不能为空，请核对"
-        });
+          type: 'warning',
+          message: '各类公房的地图配置不能为空，请核对'
+        })
       }
     }
   }
-};
+}
 </script>
 <style lang="" scoped>
 .el-checkbox {
