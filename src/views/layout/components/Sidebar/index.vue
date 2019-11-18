@@ -5,7 +5,7 @@
       :show-timeout="200"
       :default-active="$route.path"
       :collapse="isCollapse"
-      :unique-opened="true"
+      :unique-opened="false"
       background-color="#304156"
       text-color="#bfcbd9"
       active-text-color="#409EFF"
@@ -16,15 +16,15 @@
 </template>
 
 <script>
-import { getConstantRouterMap } from "@/router"
+import { getConstantRouterMap } from '@/router'
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 
 export default {
 
-  data(){
+  data () {
     return {
-      permission_routers:getConstantRouterMap()
+      permission_routers: getConstantRouterMap()
     }
   },
   components: { SidebarItem },
@@ -32,7 +32,7 @@ export default {
     ...mapGetters([
       'sidebar'
     ]),
-    isCollapse() {
+    isCollapse () {
       return !this.sidebar.opened
     }
   }

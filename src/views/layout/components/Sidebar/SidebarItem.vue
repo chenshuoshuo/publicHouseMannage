@@ -78,7 +78,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.routes)
   },
   methods: {
     hasOneShowingChildren (children) {
