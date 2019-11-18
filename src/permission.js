@@ -8,45 +8,37 @@ import { refreshToken, casBind } from './mylogin'
 import { getUserInfo } from '@/api/user'
 import { Message } from 'element-ui'
 import axios from 'axios'
-// import store from '@/store' 
 
 // NProgress.configure({ showSpinner: false })// NProgress Configuration
 
-const whiteList = ['/mylogin', '/myregister',]// no redirect whitelist
+const whiteList = ['/mylogin', '/myregister' ]// no redirect whitelist
 // const whiteList = []
 
-
-router.beforeEach(async(to, from, next) => {
-  
-  console.log('from',from)
-  console.log('to',to.path)
+router.beforeEach(async (to, from, next) => {
   // NProgress.start() // start progress bar
- 
+
   if (getToken()) { // determine if there has token
-    console.log('lyl');
     // getNav().then((res)=>{
     //   console.log('路由',res);
     // });
     // getUserInfo(btoa('*')).then((res)=>{
     //     console.log("用户信息",res);
     // })
-    
-    /* has token*/
-    //if (store.getters.addRouters.length > 0) 
-    if (store.getters.permission_routes && store.getters.permission_routes.length > 0 ) {
-      console.log('okoko'); 
+
+    /* has token */
+    // if (store.getters.addRouters.length > 0)
+    if (store.getters.permission_routes && store.getters.permission_routes.length > 0) {
       next()
     } else {
-      console.log('dmy');
       // getUserInfo(btoa('*')).then(res => {
       //   if (res.data.code === 0) {
       //     if (!res.data.data.admin) {
-           
+
       //       next('/40111111')
       //     } else {
       //       const roles = res.data.data.authorities.filter(item => item.type === 'm7722_menu');
       //       console.log(roles);
-            
+
       //       window.cmccr_userId = res.data.data.userId
       //       // store.dispatch('GenerateRoutes', roles).then(() => { // 根据roles权限生成可访问的路由表
       //       //   store.dispatch('SaveUser', res.data.data)
@@ -55,7 +47,7 @@ router.beforeEach(async(to, from, next) => {
       //       // })
       //     }
       //   } else {
-          
+
       //     next('/401111')
       //   }
       // }).catch(() => {
@@ -64,19 +56,17 @@ router.beforeEach(async(to, from, next) => {
       // }).finally(() => {
       //   router.addRoutes([{ path: '*', redirect: '/404', hidden: true }])
       // })
-      //........
-      const accessRoutes = await store.dispatch('getInfo') //('user/getinfo');
-      console.log('accessroute',accessRoutes);
-      router.addRoutes(accessRoutes);
-      next({ ...to, replace: true });
-      //保存路由
+      // ........
+      const accessRoutes = await store.dispatch('getInfo') // ('user/getinfo');
+      console.log('accessroute', accessRoutes)
+      router.addRoutes(accessRoutes)
+      next({ ...to, replace: true })
+      // 保存路由
       // store.dispatch('SaveRoutes',accessRoutes);
-      console.log('完整',store.getters.permission_routes)
-      
-      
+      console.log('完整', store.getters.permission_routes)
     }
     if (to.path === '/mylogin') {
-      console.log('jotaru');
+      console.log('jotaru')
       next({ path: '/' })
       // NProgress.done()
     } else {
@@ -84,7 +74,6 @@ router.beforeEach(async(to, from, next) => {
       next()
     }
   } else {
-    
     if (getRefresh()) { // 如果有更新token
       refreshToken(getRefresh()).then(res => {
         setToken(res.data.access_token, res.data.expires_in)
@@ -96,13 +85,13 @@ router.beforeEach(async(to, from, next) => {
         next({ ...to, replace: true })
       })
     } else {
-      console.log('zzz');
+      console.log('zzz')
       if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-        console.log('tppath',to.path);
+        console.log('tppath', to.path)
         next()
       } else {
         if (window.g.CAS_URL) { // 如果有单点登录路径
-          console.log('单点登录');
+          console.log('单点登录')
           var service = window.location.origin + window.location.pathname
           if (window.g.CAS_URL && !window.location.search) {
             window.location.href = window.g.CAS_URL + '/login?service=' + service
@@ -145,13 +134,12 @@ router.beforeEach(async(to, from, next) => {
             })
           }
         } else {
-          console.log('jojo');
-          if(to.path=='/403'){
+          console.log('jojo')
+          if (to.path == '/403') {
             next()
-          }else{
+          } else {
             next('/403')
           }
-         
         }
         // NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
       }

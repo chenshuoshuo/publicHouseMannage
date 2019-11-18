@@ -32,6 +32,7 @@ const transform = (data) => {
     //   }
     // }
     if (v.route.split('/').length == 2) {
+      console.log('v', v)
       return {
         authorityId: v.authorityId,
         parentId: v.parentId,
@@ -39,6 +40,7 @@ const transform = (data) => {
         component: Layout,
         redirect: 'noRedirect',
         name: v.content,
+        alwaysShow: true,
         meta: {
           title: v.name,
           icon: 'component'
@@ -52,8 +54,8 @@ const transform = (data) => {
         path: v.content,
         component: () => import(`@/views${v.route}`),
         name: v.content,
+        alwaysShow: true,
         meta: { title: v.content, icon: 'component' }
-        
       }
     }
   })
@@ -69,9 +71,9 @@ const treeData = (list) => {
   return temp.filter(father => {
     // 把当前节点的所有子节点找到
     const childArr = temp.filter(child => father.authorityId === child.parentId)
-    childArr.length > 0 ? father.children = childArr : '';
-    if(childArr.length > 0){
-      father.redirect=`${father.path}/${childArr[0].path}`
+    childArr.length > 0 ? father.children = childArr : ''
+    if (childArr.length > 0) {
+      father.redirect = `${father.path}/${childArr[0].path}`
     }
     // 只返回第一级数据；如果当前节点的fatherId不为空，但是在父节点不存在，也为一级数据
     return father.parentId === null || !tempObj[father.parentId]

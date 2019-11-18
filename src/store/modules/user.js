@@ -1,55 +1,53 @@
 import { login, register, logout, getUserInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '../../auth'
 import filterTree from '@/utils/routeTree'
-import  {  constantRouterMap } from '@/router'
+import { asyncRoutes, constantRouterMap } from '@/router'
 import Cookies from 'js-cookie'
-const user={
- state:{
-  token: getToken(),
-  name: '',
-  avatar: '',
-  introduction: '',
-  roles: [],
-  routes: [],
-  menus: []
-},
+const user = {
+  state: {
+    token: getToken(),
+    name: '',
+    avatar: '',
+    introduction: '',
+    roles: [],
+    routes: [],
+    menus: []
+  },
 
- mutations:{
-  SET_TOKEN: (state, token) => {
-    state.token = token
-  },
-  SET_INTRODUCTION: (state, introduction) => {
-    state.introduction = introduction
-  },
-  SET_NAME: (state, name) => {
-    state.name = name
-    Cookies.set('userName', name)
-  },
-  SET_REFRESH: (state, refreshToken) => {
-    state.refreshToken = refreshToken
-    Cookies.set('refreshToken', refreshToken)
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  },
-  SET_ROLES: (state, roles) => {
-    state.roles = roles
-  },
-  SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes;
-    state.routes = constantRouterMap.concat(routes)
-    
-  },
-  SET_USERINFO: (state, userId) => {
-    state.userId = userId
-  },
-  SAVE_ROUTES:(state, routes)=>{
-    
+  mutations: {
+    SET_TOKEN: (state, token) => {
+      state.token = token
+    },
+    SET_INTRODUCTION: (state, introduction) => {
+      state.introduction = introduction
+    },
+    SET_NAME: (state, name) => {
+      state.name = name
+      Cookies.set('userName', name)
+    },
+    SET_REFRESH: (state, refreshToken) => {
+      state.refreshToken = refreshToken
+      Cookies.set('refreshToken', refreshToken)
+    },
+    SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar
+    },
+    SET_ROLES: (state, roles) => {
+      state.roles = roles
+    },
+    SET_ROUTES: (state, routes) => {
+      state.addRoutes = routes
+      state.routes = constantRouterMap.concat(routes)
+    },
+    SET_USERINFO: (state, userId) => {
+      state.userId = userId
+    },
+    SAVE_ROUTES: (state, routes) => {
 
-  }
-},
+    }
+  },
 
- actions:{
+  actions: {
   // user login
   // login({ commit }, userInfo) {
   //   const { username, password } = userInfo
@@ -81,43 +79,42 @@ const user={
   //     })
   //   })
   // },
-  SaveRoutes({commit,routes}){
-    commit('SAVE_ROUTES',routes)
-  },
+    SaveRoutes ({commit, routes}) {
+      commit('SAVE_ROUTES', routes)
+    },
 
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getUserInfo(btoa('*')).then(response => {
+    // get user info
+    getInfo ({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        getUserInfo(btoa('*')).then(response => {
         // const { data } = response
-        const roles = response.data.data.authorities.filter(item => item.type === 'm7722_menu');
-        console.log('开始的role',roles);
-        const routes = filterTree(roles)
+          const roles = response.data.data.authorities.filter(item => item.type === 'm7722_menu')
+          console.log('开始的role', roles)
+          const routes = filterTree(roles)
+          console.log('routes', routes)
+          // if (!data) {
+          //   reject('Verification failed, please Login again.')
+          // }
+          //
+          // const { roles, name, avatar, introduction } = data
+          //
+          // // roles must be a non-empty array
+          // if (!roles || roles.length <= 0) {
+          //   reject('getInfo: roles must be a non-null array!')
+          // }
+          //
 
-
-        // if (!data) {
-        //   reject('Verification failed, please Login again.')
-        // }
-        //
-        // const { roles, name, avatar, introduction } = data
-        //
-        // // roles must be a non-empty array
-        // if (!roles || roles.length <= 0) {
-        //   reject('getInfo: roles must be a non-null array!')
-        // }
-        //
-
-        commit('SET_ROUTES', routes)
-        commit('SET_USERINFO', response.data.data.userId)
-        // commit('SET_NAME', name)
-        // commit('SET_AVATAR', avatar)
-        // commit('SET_INTRODUCTION', introduction)
-        resolve(routes)
-      }).catch(error => {
-        reject(error)
+          commit('SET_ROUTES', routes)
+          commit('SET_USERINFO', response.data.data.userId)
+          // commit('SET_NAME', name)
+          // commit('SET_AVATAR', avatar)
+          // commit('SET_INTRODUCTION', introduction)
+          resolve(routes)
+        }).catch(error => {
+          reject(error)
+        })
       })
-    })
-  },
+    }
 
   // user logout
   // logout({ commit, state }) {
@@ -161,7 +158,7 @@ const user={
   //     resolve()
   //   })
   // }
-}
+  }
 }
 export default user
 // export default {

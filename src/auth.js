@@ -1,50 +1,50 @@
 import Cookies from 'js-cookie'
-import { refreshToken } from './mylogin' 
+import { refreshToken } from './mylogin'
 import store from '@/store'
 
 const TokenKey = 'Admin-Token'
 const RefreshToken = 'Refresh_token'
 const ExpirationDate = 'timeCookie'
 
-export function getToken() {
+export function getToken () {
   return localStorage.getItem(Cookies.get(TokenKey))
 }
-export function getRefresh() {
+export function getRefresh () {
   return localStorage.getItem(Cookies.get(RefreshToken))
 }
-export function getExpirationDate() {
+export function getExpirationDate () {
   return Cookies.get(ExpirationDate)
 }
 
-export function setToken(token, time) {
+export function setToken (token, time) {
   Cookies.set(TokenKey, TokenKey, { expires: new Date(new Date().getTime() + time * 1000) })
   localStorage.setItem(TokenKey, token)
   Cookies.set(ExpirationDate, new Date(new Date().getTime() + time * 1000), { expires: new Date(new Date().getTime() + time * 1000) })
   store.commit('SET_TOKEN', token)
 }
 
-export function setRefreshToken(refresh, expires = 7) {
+export function setRefreshToken (refresh, expires = 7) {
   Cookies.set(RefreshToken, RefreshToken, { expires: expires })
   localStorage.setItem(RefreshToken, refresh)
   store.commit('SET_REFRESH_TOKEN', refresh)
 }
 
-export function setAdminToken(token) {
+export function setAdminToken (token) {
   Cookies.set(TokenKey, token)
 }
 
-export function removeToken() {
+export function removeToken () {
   Cookies.remove(TokenKey)
 }
-export function removeRefresh() {
+export function removeRefresh () {
   Cookies.remove(RefreshToken)
 }
 
-export function removeExpirationDate() {
+export function removeExpirationDate () {
   Cookies.remove(ExpirationDate)
 }
 
-export function autoGetToken(token, time) {
+export function autoGetToken (token, time) {
   time = time || new Date(getExpirationDate()).getTime() - new Date().getTime()
   if (window.cmccr_timer) {
     clearTimeout(window.cmccr_timer)
