@@ -1,6 +1,6 @@
 <template>
   <div class="menu-wrapper">
-    <h1 style="text-align:center">可视化公房</h1>
+    <h1 style="text-align:center;margin-top:20px">可视化公房管理</h1>
     <template v-for="item in routes" v-if='item.children'>
       <!-- v-if="!item.hidden&&item.children" -->
       <router-link
@@ -58,11 +58,11 @@
 </template>
 
 <script>
+import { generateTitle } from '@/utils/i18n'
 const packgeJson = require('../../../../../package.json')
-import { generateTitle } from "@/utils/i18n";
 
 export default {
-  name: "SidebarItem",
+  name: 'SidebarItem',
   props: {
     routes: {
       type: Array
@@ -72,31 +72,31 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       version: packgeJson.version
     }
   },
-  mounted() {
-    console.log(this.routes);
+  mounted () {
+    console.log(this.routes)
   },
   methods: {
-    hasOneShowingChildren(children) {
+    hasOneShowingChildren (children) {
       if (children) {
         const showingChildren = children.filter(item => {
-          return !item.hidden;
-        });
+          return !item.hidden
+        })
         if (showingChildren.length === 1) {
-          return true;
+          return true
         }
-        return false;
-      }else{
+        return false
+      } else {
         return false
       }
     },
     generateTitle
   }
-};
+}
 </script>
 
 <style scoped>

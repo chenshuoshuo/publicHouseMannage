@@ -36,6 +36,7 @@ export const constantRouterMap = [
     path: '/systemSetting',
     component: Layout,
     name: 'systemSetting',
+    alwaysShow: true,
     redirect: '/systemSetting/mapSetting',
     meta: {
       title: 'systemSetting',

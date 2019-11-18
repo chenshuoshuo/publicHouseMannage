@@ -91,7 +91,6 @@ const user = {
           const roles = response.data.data.authorities.filter(item => item.type === 'm7722_menu')
           console.log('开始的role', roles)
           const routes = filterTree(roles)
-          console.log('routes', routes)
           // if (!data) {
           //   reject('Verification failed, please Login again.')
           // }
