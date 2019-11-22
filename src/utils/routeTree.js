@@ -5,7 +5,7 @@ import Layout from '@/views/layout/Layout.vue'
 
 const transform = (data) => {
   return data.map(v => {
-    console.log('v', v)
+    // console.log('v', v)
     // if (v.parentId) {
     //   console.log('route', `../views${v.route}`, v.content)
     //   return {
