@@ -30,10 +30,10 @@
   </div>
 </template>
 <script>
-import { getAllMapSetting, getAllType, submitSetting } from '@/api/data';
-import { constants } from 'fs';
-import axios from 'axios';
-import qs from 'qs';
+import { getAllMapSetting, getAllType, submitSetting } from '@/api/data'
+import { constants } from 'fs'
+import axios from 'axios'
+import qs from 'qs'
 // :label="i.attrname" style="width:220px" class="el-checkbox" v-for="(i,k) of boxList[index]" :key='k'
 export default {
   data () {
