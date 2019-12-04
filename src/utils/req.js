@@ -8,15 +8,15 @@ const BASE_CCR = window.g.BASE_CCR
 
 export const ZK = axios.create({
   // baseURL: 'https://cmdown.parkbobo.com' // api的base_url
-  baseURL:BASE_CCR,
-   // request timeout
+  baseURL: BASE_CCR
+  // request timeout
 })
 
 // request interceptor
 ZK.interceptors.request.use(config => {
   if (getToken()) {
     // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-    console.log('xiedai_token');
+    console.log('xiedai_token')
     config.headers['Authorization'] = 'Bearer ' + getToken()
     config.headers['Cache-Control'] = 'no-cache'
   }

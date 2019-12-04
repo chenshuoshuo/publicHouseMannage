@@ -2,7 +2,7 @@ import router from './router/index'
 // import NProgress from 'nprogress' // progress bar
 // import 'nprogress/nprogress.css'// progress bar style
 import store from './store'
-import { getToken, getRefresh, getExpirationDate, autoGetToken, setToken, removeRefresh, removeToken } from './auth' // getToken from cookie
+import { getToken, getRefresh, getExpirationDate, autoGetToken, setToken, removeRefresh, removeToken, setRefreshToken } from './auth' // getToken from cookie
 import {getNav} from '@/api/user'
 import { refreshToken, casBind } from './mylogin'
 import { getUserInfo } from '@/api/user'
@@ -58,7 +58,6 @@ router.beforeEach(async (to, from, next) => {
       // })
       // ........
       const accessRoutes = await store.dispatch('getInfo') // ('user/getinfo');
-      console.log('accessroute', accessRoutes)
       router.addRoutes(accessRoutes)
       next({ ...to, replace: true })
       // 保存路由
@@ -107,7 +106,7 @@ router.beforeEach(async (to, from, next) => {
                   if (res.data.code === 0) {
                     axios.get(`${window.g.BASE_CCR}/oauth/token?client_id=cmccr-h5&client_secret=cmccr-h5&grant_type=password&username=${username}&password=${window.location.search.split('=')[1]}`).then(response => {
                       setToken(response.data.access_token, res.data.expires_in)
-                      // setRefreshToken(response.data.refresh_token)
+                      setRefreshToken(response.data.refresh_token)
                       autoGetToken(response.data.refresh_token)
                       window.location.search = ''
                       next('/')
