@@ -47,6 +47,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :headers="{Authorization: 'Bearer ' + token}"
        >
         <div class="dialogdiv">
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
@@ -54,21 +55,23 @@
            <p>建议尺寸:100X100px</p>
           <p>只支持jpg.png格式，大小不超过100k</p>
         </div>
-        
+
       </el-upload>
       <div style="text-align:right"><el-button type="primary" @click="submmit">确定</el-button></div>
-      
+
     </el-dialog>
   </div>
 </template>
- <script>
-import { getAllType, editIcon, searchType, uploadicon } from "@/api/data";
-import { constants } from "fs";
-import qs from "qs";
+<script>
+import { getAllType, editIcon, searchType, uploadicon } from '@/api/data'
+import { getToken } from '@/utils/auth'
+import { constants } from 'fs'
+import qs from 'qs'
 export default {
-  data() {
+  data () {
     return {
-      url: "https://jsonplaceholder.typicode.com/posts/",
+      token: getToken(),
+      url: 'https://jsonplaceholder.typicode.com/posts/',
       listLoading: false,
       tableData: [
         // {
@@ -84,124 +87,124 @@ export default {
       ],
       newtableData: [],
       dialogFormVisible: false,
-      imageUrl: "",
-      index: "",
-      typeName: "",
+      imageUrl: '',
+      index: '',
+      typeName: '',
       total: 0,
       pageSize: 6,
       background: true,
       currentPage: 0,
-      file: ""
-    };
+      file: ''
+    }
   },
   methods: {
-    //编辑图标
-    handleEdit(index, row) {
-      this.imageUrl = row.icon;
-      this.index = index;
-      this.dialogFormVisible = true;
+    // handleIcon (params) {
+    //   var reader = new FileReader()
+    //   reader.readAsDataURL(params.file)
+    //   reader.onload = (e) => {
+    //     this.tableData[this.index].icon = e.target.result
+    //   }
+    //   return true
+    // },
+    // 编辑图标
+    handleEdit (index, row) {
+      this.imageUrl = row.icon
+      this.index = index
+      this.dialogFormVisible = true
     },
     // loading(file){
     //   console.log('file',file);
 
     // },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      //  console.log('img',this.imageUrl);
-      //  console.log('res',res);
-      let fd = new FormData();
-      fd.append("file", file.raw);
-      console.log(fd.get("file"));
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
+      let fd = new FormData()
+      fd.append('file', file.raw)
       uploadicon(fd).then(res => {
-        console.log(res);
         if (res.data.status) {
-          this.tableData[this.index].icon = window.g.BASE_IPS + res.data.data;
+          this.tableData[this.index].icon = window.g.BASE_IPS + res.data.data
         }
-      });
+      })
     },
-    //确认图标
-    submmit() {
-      // this.tableData[this.index].icon=this.imageUrl;
+    // 确认图标
+    submmit () {
       let params = {
         categoryId: this.tableData[this.index].typeCode,
         icon: this.tableData[this.index].icon
-      };
-      console.log("编辑图标", params);
-      console.log(params);
-      //处理参数
-      params = qs.stringify(params);
+      }
+      // 处理参数
+      params = qs.stringify(params)
 
       editIcon(params).then(res => {
-        console.log(res);
         if (res.data.status) {
           this.$message({
-            type: "success",
-            message: "编辑成功"
-          });
+            type: 'success',
+            message: '编辑成功'
+          })
+          this.initData()
         }
-      });
-      this.dialogFormVisible = false;
+      })
+      this.dialogFormVisible = false
     },
-    beforeAvatarUpload(e, file) {
+    beforeAvatarUpload (e, file) {
       //   console.log('e',e)
       //   this.file=e;
       // let fd =new FormData();
       // fd.append('file',file);
       // console.log(fd.get("file"));
     },
-    //初始化数据
-    initData() {
+    // 初始化数据
+    initData () {
       let params = {
         page: this.currentPage,
         pageSize: this.pageSize
-      };
-      params = qs.stringify(params);
+      }
+      params = qs.stringify(params)
       getAllType(params).then(res => {
-        console.log(res);
-        this.tableData = res.data.data.content;
-        this.total = this.tableData.length;
+        this.tableData = res.data.data.content
+        this.total = this.tableData.length
         // this.total=2;
         // this.newtableData=this.tableData.slice((this.pageSize)*(this.currentPage-1),(this.pageSize)*(this.currentPage))
-      });
+      })
     },
-    //上一页
-    pre() {
-      this.currentPage--;
+    // 上一页
+    pre () {
+      this.currentPage--
       this.newtableData = this.tableData.slice(
         this.pageSize * (this.currentPage - 1),
         this.pageSize * this.currentPage
-      );
+      )
     },
-    next() {
-      this.currentPage++;
+    next () {
+      this.currentPage++
       this.newtableData = this.tableData.slice(
         this.pageSize * (this.currentPage - 1),
         this.pageSize * this.currentPage
-      );
+      )
     },
-    //搜索
-    search() {
+    // 搜索
+    search () {
       //  this.tableData=this.tableData.filter((item)=>{
       //      return item.typeName.includes(this.typeName)
       // })
-      let params = { text: this.typeName };
-      params = qs.stringify(params);
+      let params = { text: this.typeName }
+      params = qs.stringify(params)
       searchType(params).then(res => {
-        console.log(res);
-        this.tableData = res.data.data.content;
-        this.total = this.tableData.length;
-      });
+        console.log(res)
+        this.tableData = res.data.data.content
+        this.total = this.tableData.length
+      })
     },
-    //分页
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      this.initData();
+    // 分页
+    handleCurrentChange (val) {
+      this.currentPage = val
+      this.initData()
     }
   },
-  beforeMount() {
-    this.initData();
+  beforeMount () {
+    this.initData()
   }
-};
+}
 </script>
  <style scoped>
 .inputContain {

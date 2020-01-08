@@ -13,7 +13,7 @@ window.g = {
   // CMGIS 接口地址
   // BASE_GIS: 'https://testgis.you07.com/cmgis-server'
   // BASE_GIS: 'https://cmdown.parkbobo.com/cmgis-server'
-  BASE_GIS: 'http://192.168.4.241/cmgis-server'
+  BASE_GIS: 'https://yx2019.you07.com/cmgis-server'
 }
 // 地图token
 if (window.creeper) { window.creeper.CreeperConfig.token = 'd2ViX3Nka3M6NDZhNzg0ZDFjMmMzYmEzZTMxMDJhODJmYzkzNzZkZGY=' }

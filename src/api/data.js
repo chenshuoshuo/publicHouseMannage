@@ -15,16 +15,16 @@ export function getAllType (data) {
   })
 }
 // 编辑图标
-export function editIcon  (query) {
+export function editIcon (query) {
   return request({
     url: `/asset/category/?${query}`,
-    method: 'put',
+    method: 'put'
   })
 }
 // 上传图标
 export function uploadicon (data) {
-  return uploadIcon({
-    url: `/asset/category/upload `,
+  return request({
+    url: `/asset/category/upload`,
     method: 'post',
     data
   })
@@ -35,7 +35,7 @@ export function editColor (query) {
   return request({
     // url:'/cmips1-server/asset/status/${query}',
     url: `/asset/status/?${query}`,
-    method: 'put',
+    method: 'put'
 
   })
 }
