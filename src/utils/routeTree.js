@@ -82,9 +82,9 @@ const treeData = (list) => {
 
 const handleTree = (data) => {
   const result = transform(data)
-  console.log('result', result)
+  // console.log('result', result)
   const transTree = treeData(result)
-  console.log('transTree', transTree)
+  // console.log('transTree', transTree)
   return transTree
 }
 

@@ -65,11 +65,9 @@ router.beforeEach(async (to, from, next) => {
       console.log('完整', store.getters.permission_routes)
     }
     if (to.path === '/mylogin') {
-      console.log('jotaru')
       next({ path: '/' })
       // NProgress.done()
     } else {
-      console.log('notoken')
       next()
     }
   } else {
@@ -84,9 +82,7 @@ router.beforeEach(async (to, from, next) => {
         next({ ...to, replace: true })
       })
     } else {
-      console.log('zzz')
       if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
-        console.log('tppath', to.path)
         next()
       } else {
         if (window.g.CAS_URL) { // 如果有单点登录路径
