@@ -23,14 +23,14 @@
           <el-avatar size="small" :src="scope.row.icon"></el-avatar>
         </template>
       </el-table-column>
-      <el-table-column label="操作" class="ol">
+      <el-table-column label="操作" class="ol" align="center">
         <template slot-scope="scope">
           <el-button size="mini" type="success" @click="handleEdit(scope.$index, scope.row)">编辑图标</el-button>
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <div style="text-align:center">
+    <div style="text-align:right">
       <el-pagination
         :total="total"
         :background="background"

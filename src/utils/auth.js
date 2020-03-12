@@ -19,7 +19,7 @@
 // }
 import Cookies from 'js-cookie'
 import store from '@/store'
-import { refreshToken } from '@/api/user'
+import { refreshToken } from './mylogin'
 
 const TokenKey = 'Admin-Token'
 const RefreshToken = 'Refresh_token'

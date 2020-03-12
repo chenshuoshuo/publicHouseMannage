@@ -23,7 +23,7 @@
            <el-color-picker v-model="scope.row.color"></el-color-picker>
           </template>
        </el-table-column>
-         <el-table-column label="操作" class="ol">
+         <el-table-column label="操作" class="ol" align="center">
       <template slot-scope="scope">
         <el-button
           size="mini"
@@ -35,19 +35,19 @@
     </el-table>
     <!-- 编辑颜色弹窗 -->
     <!-- 分页 -->
-    <div style="text-align:center">
+    <div style="text-align:right">
     <el-pagination
     :total='total'
     :background="background"
     :page-size='pageSize'
     :current-page='currentPage'
     @current-change="handleCurrentChange"
-    
+
     >
-      
+
     </el-pagination>
     </div>
-    
+
     <el-dialog
      title="编辑颜色" :visible.sync="dialogFormVisible"
      class="colordialog"
@@ -56,17 +56,17 @@
      <div style="text-align:right">
      <el-button type="primary" @click="submmit">提交</el-button>
      </div>
-      
+
     </el-dialog>
   </div>
 </template>
  <script>
- 
+
   import {getAllState,editColor,searchStatus} from '@/api/data'
 import { constants } from 'fs';
 import qs from 'qs'
 export default {
- 
+
   data() {
     return {
       // scope.row.color
@@ -94,7 +94,7 @@ export default {
 
     };
   },
- 
+
   methods:{
     //编辑颜色
     handleEdit(index,row){
@@ -102,7 +102,7 @@ export default {
       this.index=index;
       this.dialogFormVisible=true;
       // console.log(row);
-    
+
     },
     //提交
     submmit(){
@@ -114,10 +114,10 @@ export default {
       console.log({
         color:this.tableData[this.index].color,
         name:this.tableData[this.index].statusName
-        
-        
+
+
       })
-      
+
       //对参数进行处理
        params=qs.stringify(params);
        console.log(params)
@@ -165,22 +165,22 @@ export default {
            this.tableData=res.data.data.content;
            this.total=this.tableData.length
         })
-        
-        
-      
+
+
+
     },
     //分页
     handleCurrentChange(val){
       this.currentPage=val;
       this.initData()
-      
+
     },
-  
-   
+
+
   },
   beforeMount(){
     this.initData()
-    
+
   }
 };
 </script>
@@ -201,7 +201,6 @@ export default {
 .colorpicker{
 
  margin-left:50%;
-} 
+}
 
 </style>
- 
