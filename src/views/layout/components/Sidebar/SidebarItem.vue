@@ -59,6 +59,7 @@
 
 <script>
 import { generateTitle } from '@/utils/i18n'
+import {saveVerManager} from '@/api/user'
 const packgeJson = require('../../../../../package.json')
 
 export default {
@@ -78,8 +79,17 @@ export default {
     }
   },
   mounted () {
+    this.saveVerManager()
   },
   methods: {
+    saveVerManager () {
+      this.version = this.version.split('.')[0] + '.' + this.version.split('.')[1] + '.' + this.version.split('.')[2].split('').join('.')
+      saveVerManager({
+        systemName: '可视化公房',
+        moduleName: 'Web后台管理系统',
+        version: this.version
+      }).then().catch(e => console.log(e))
+    },
     hasOneShowingChildren (children) {
       if (children) {
         const showingChildren = children.filter(item => {
