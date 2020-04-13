@@ -40,7 +40,7 @@
       ></el-pagination>
     </div>
     <!-- 编辑图标弹框 -->
-    <el-dialog title="编辑图标" :visible.sync="dialogFormVisible">
+    <el-dialog title="编辑图标" :visible.sync="dialogFormVisible" @close="closeEditDialog">
       <el-upload
         class="avatar-uploader iconupload"
         :action="url"
@@ -71,20 +71,10 @@ export default {
   data () {
     return {
       token: getToken(),
-      url: 'https://jsonplaceholder.typicode.com/posts/',
+      // url: 'https://jsonplaceholder.typicode.com/posts/',
+      url: `${window.g.BASE_IPS}/asset/category/upload`,
       listLoading: false,
-      tableData: [
-        // {
-        //   number: "02",
-        //   typeName: "学生用房",
-        //   imgSrc:  "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-        // },
-        // {
-        //   number: "03",
-        //   typeName: "教室用房",
-        //   imgSrc:"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-        // }
-      ],
+      tableData: [],
       newtableData: [],
       dialogFormVisible: false,
       imageUrl: '',
@@ -97,15 +87,10 @@ export default {
       file: ''
     }
   },
+  mounted () {
+    console.log(window.g.BASE_IPS)
+  },
   methods: {
-    // handleIcon (params) {
-    //   var reader = new FileReader()
-    //   reader.readAsDataURL(params.file)
-    //   reader.onload = (e) => {
-    //     this.tableData[this.index].icon = e.target.result
-    //   }
-    //   return true
-    // },
     // 编辑图标
     handleEdit (index, row) {
       this.imageUrl = row.icon
@@ -120,11 +105,19 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw)
       let fd = new FormData()
       fd.append('file', file.raw)
-      uploadicon(fd).then(res => {
-        if (res.data.status) {
-          this.tableData[this.index].icon = window.g.BASE_IPS + res.data.data
-        }
-      })
+      console.log('res', res)
+      if (res.status) {
+        this.tableData[this.index].icon = window.g.BASE_IPS + '/' + res.data
+        console.log('222', this.tableData[this.index].icon)
+      }
+      // uploadicon(fd).then(res => {
+      //   if (res.data.status) {
+      //     this.tableData[this.index].icon = window.g.BASE_IPS + res.data.data
+      //   }
+      // })
+    },
+    closeEditDialog () {
+      this.initData()
     },
     // 确认图标
     submmit () {
