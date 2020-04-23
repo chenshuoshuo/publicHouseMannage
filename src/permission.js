@@ -58,8 +58,19 @@ router.beforeEach(async (to, from, next) => {
       // })
       // ........
       const accessRoutes = await store.dispatch('getInfo') // ('user/getinfo');
-      router.addRoutes(accessRoutes)
-      next({ ...to, replace: true })
+      console.log(accessRoutes)
+
+      if (accessRoutes.length > 0) {
+        accessRoutes.push({
+          path: '/',
+          redirect: accessRoutes[0].path
+        })
+        router.addRoutes(accessRoutes)
+        next({ ...to, replace: true })
+      } else {
+        next('/403')
+      }
+
       // 保存路由
       // store.dispatch('SaveRoutes',accessRoutes);
       console.log('完整', store.getters.permission_routes)
