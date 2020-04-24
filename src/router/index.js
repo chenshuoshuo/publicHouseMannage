@@ -1,18 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout/Layout'
 import Noauth from '@/views/Noauth'
 import store from '../store'
 
 Vue.use(Router)
 
 export const constantRouterMap = [
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/typeMannage'
-
-  },
   {path: '/403',
     component: Noauth
 
