@@ -52,7 +52,7 @@
       </el-submenu>
     </template>
     <div class="support">
-      <span>版本：&nbsp;V{{version}}</span>
+      <!-- <span>版本：&nbsp;V{{version}}</span> -->
     </div>
   </div>
 </template>
